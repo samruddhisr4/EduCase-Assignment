@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-const FloatingField = ({
-  label,
-  type = "text",
-  placeholder,
-  value,
-  onChange,
-  required,
-}) => {
+const FloatingField = ({ label, type = "text", placeholder, value, onChange, required }) => {
   const [focused, setFocused] = useState(false);
   return (
     <div style={{ position: "relative", marginBottom: "20px" }}>
@@ -70,6 +63,10 @@ const Login = () => {
     else setError(result.message);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleLogin();
+  };
+
   return (
     <div
       style={{
@@ -79,87 +76,136 @@ const Login = () => {
         overflowY: "auto",
         msOverflowStyle: "none",
         scrollbarWidth: "none",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
       }}
     >
-      <div style={{ padding: "120px 50px 32px" }}>
-        <p
-          onClick={() => navigate("/")}
+      <div style={{ padding: "40px 36px 32px" }}>
+        {/* Logo / Brand */}
+        <div style={{ marginBottom: "32px" }}>
+          <div
+            style={{
+              width: "48px",
+              height: "48px",
+              background: "#6C25FF",
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "20px",
+            }}
+          >
+            <span style={{ color: "#fff", fontFamily: "Rubik, sans-serif", fontWeight: 700, fontSize: "20px" }}>P</span>
+          </div>
+          <h1
+            style={{
+              fontFamily: "Rubik, sans-serif",
+              fontWeight: 600,
+              fontSize: "26px",
+              lineHeight: "34px",
+              color: "#1D2226",
+              marginBottom: "6px",
+            }}
+          >
+            Sign in to PopX
+          </h1>
+          <p
+            style={{
+              fontFamily: "Rubik, sans-serif",
+              fontWeight: 400,
+              fontSize: "14px",
+              color: "#919191",
+            }}
+          >
+            Welcome back! Enter your credentials to continue.
+          </p>
+        </div>
+
+        {/* Tabs */}
+        <div
           style={{
-            fontFamily: "Rubik, sans-serif",
-            fontSize: "14px",
-            color: "#6C25FF",
-            cursor: "pointer",
-            marginBottom: "24px",
             display: "flex",
-            alignItems: "center",
-            gap: "4px",
+            background: "#EFEFEF",
+            borderRadius: "8px",
+            padding: "4px",
+            marginBottom: "28px",
           }}
         >
-          ← Back
-        </p>
-        <h1
-          style={{
-            fontFamily: "Rubik, sans-serif",
-            fontWeight: 500,
-            fontSize: "28px",
-            lineHeight: "36px",
-            color: "#1D2226",
-            marginBottom: "8px",
-          }}
-        >
-          Signin to your
-          <br />
-          PopX account
-        </h1>
+          <div
+            style={{
+              flex: 1,
+              textAlign: "center",
+              padding: "8px 0",
+              background: "#FFFFFF",
+              borderRadius: "6px",
+              fontFamily: "Rubik, sans-serif",
+              fontSize: "14px",
+              fontWeight: 500,
+              color: "#6C25FF",
+              boxShadow: "0 1px 4px rgba(0,0,0,0.08)",
+              cursor: "default",
+            }}
+          >
+            Login
+          </div>
+          <div
+            onClick={() => navigate("/signup")}
+            style={{
+              flex: 1,
+              textAlign: "center",
+              padding: "8px 0",
+              fontFamily: "Rubik, sans-serif",
+              fontSize: "14px",
+              fontWeight: 400,
+              color: "#919191",
+              cursor: "pointer",
+            }}
+          >
+            Register
+          </div>
+        </div>
 
-        <p
-          style={{
-            fontFamily: "Rubik, sans-serif",
-            fontWeight: 400,
-            fontSize: "18px",
-            lineHeight: "26px",
-            color: "#1D2226",
-            opacity: 0.6,
-            marginBottom: "32px",
-          }}
-        >
-          Lorem ipsum dolor sit amet,
-          <br />
-          consectetur adipiscing elit,
-        </p>
-
+        {/* Fields */}
         <FloatingField
           label="Email Address"
           type="email"
-          placeholder="Enter Email Address"
+          placeholder="Enter your email"
           value={form.email}
           onChange={set("email")}
           required
         />
+        <div onKeyDown={handleKeyDown}>
+          <FloatingField
+            label="Password"
+            type="password"
+            placeholder="Enter your password"
+            value={form.password}
+            onChange={set("password")}
+            required
+          />
+        </div>
 
-        <FloatingField
-          label="Password"
-          type="password"
-          placeholder="Enter Password"
-          value={form.password}
-          onChange={set("password")}
-          required
-        />
-
+        {/* Error */}
         {error && (
-          <p
+          <div
             style={{
+              background: "#FFF0EF",
+              border: "1px solid #DD4A3D",
+              borderRadius: "6px",
+              padding: "10px 14px",
+              marginBottom: "16px",
+              marginTop: "-8px",
               fontFamily: "Rubik, sans-serif",
               fontSize: "13px",
               color: "#DD4A3D",
-              marginBottom: "8px",
-              marginTop: "-4px",
             }}
           >
             {error}
-          </p>
+          </div>
         )}
 
+        {/* Login Button */}
         <button
           onClick={handleLogin}
           disabled={!isValid}
@@ -167,33 +213,33 @@ const Login = () => {
             width: "100%",
             height: "50px",
             background: isValid ? "#6C25FF" : "#CBCBCB",
-            borderRadius: "6px",
+            borderRadius: "8px",
             border: "none",
             fontFamily: "Rubik, sans-serif",
             fontWeight: 500,
             fontSize: "16px",
             color: "#FFFFFF",
             cursor: isValid ? "pointer" : "not-allowed",
-            marginTop: "8px",
+            transition: "background 0.2s",
+            marginBottom: "20px",
           }}
         >
           Login
         </button>
 
+        {/* Register link */}
         <p
           style={{
             fontFamily: "Rubik, sans-serif",
             fontSize: "13px",
             color: "#919191",
             textAlign: "center",
-            marginTop: "16px",
-            cursor: "pointer",
           }}
         >
           Don't have an account?{" "}
           <span
             onClick={() => navigate("/signup")}
-            style={{ color: "#6C25FF", fontWeight: 500 }}
+            style={{ color: "#6C25FF", fontWeight: 500, cursor: "pointer" }}
           >
             Create Account
           </span>

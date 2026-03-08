@@ -8,7 +8,6 @@ import {
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
-import Landing from "./pages/Landing";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import AccountSettings from "./pages/AccountSettings";
@@ -38,14 +37,9 @@ function App() {
             }}
           >
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <PublicRoute>
-                    <Landing />
-                  </PublicRoute>
-                }
-              />
+              {/* Default: go straight to login */}
+              <Route path="/" element={<Navigate to="/login" replace />} />
+
               <Route
                 path="/signup"
                 element={
@@ -70,7 +64,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<Navigate to="/login" replace />} />
             </Routes>
           </div>
         </div>

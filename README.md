@@ -8,7 +8,6 @@
 
 - [Overview](#-overview)
 - [Live Demo](#-live-demo)
-- [Screenshots](#-screenshots)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
@@ -29,23 +28,14 @@
 - Clean **React 19** component architecture with Context API for global state
 - **Route-level auth guards** using `ProtectedRoute` and `PublicRoute` wrappers
 - **Persistent sessions** via `localStorage` — users stay logged in across page refreshes
-- A polished **φ375×812px mobile viewport**, centered on all screen sizes to mimic a real device frame
+- A polished **375×812px mobile viewport**, centered on all screen sizes to mimic a real device frame
 - **Floating label inputs** with purple focus rings that match the PopX design spec
 
 ---
 
 ## 🔗 Live Demo
 
-> 🚀 Deployed on Vercel — [View Live](https://educase-assignment.vercel.app)  
-> *(Update this link after deployment)*
-
----
-
-## 📸 Screenshots
-
-| Landing | Sign Up | Login | Account Settings |
-|---------|---------|-------|-----------------|
-| Welcome screen with Sign Up & Login CTAs | Full registration form with agency selection | Email & password login with validation | Protected profile dashboard with avatar |
+> 🚀 Deployed — *(add your Vercel or Render URL here after deployment)*
 
 ---
 
@@ -80,33 +70,34 @@
 ## 📁 Project Structure
 
 ```
-EduCase-Assignment/
-└── educase_react/              # Vite + React application root
-    ├── public/                 # Static assets served as-is
-    ├── src/
-    │   ├── assets/             # Images (e.g. profile.jpg)
-    │   ├── auth/
-    │   │   └── authUtils.js    # localStorage helpers: saveUser, saveToken, validateLogin, logout, getUser
-    │   ├── components/
-    │   │   ├── FloatingInput.jsx     # Reusable animated floating-label input field
-    │   │   ├── ProtectedRoute.jsx    # Redirects unauthenticated users → /login
-    │   │   └── PublicRoute.jsx       # Redirects authenticated users → /account
-    │   ├── context/
-    │   │   └── AuthContext.jsx       # Global auth state: isLoggedIn, currentUser, register, login, logout
-    │   ├── pages/
-    │   │   ├── Landing.jsx           # Welcome screen (public only)
-    │   │   ├── Signup.jsx            # Registration form (public only)
-    │   │   ├── Login.jsx             # Login form (public only)
-    │   │   └── AccountSettings.jsx   # Profile dashboard (protected)
-    │   ├── App.jsx             # Router setup and mobile viewport wrapper
-    │   ├── main.jsx            # React DOM entry point
-    │   └── index.css           # Global base styles
-    ├── index.html              # HTML entry point (loads Rubik font)
-    ├── vite.config.js          # Vite + React + Tailwind plugin config
-    ├── tailwind.config.js      # Custom PopX color tokens & font family
-    ├── postcss.config.js       # PostCSS config for Tailwind
-    ├── eslint.config.js        # ESLint flat config
-    └── package.json            # Dependencies & scripts
+EduCase-Assignment/               # Git repo root (Vite project lives here)
+├── public/
+│   └── _redirects                # Render SPA redirect rule (/* → /index.html)
+├── src/
+│   ├── assets/                   # Images (e.g. profile.jpg)
+│   ├── auth/
+│   │   └── authUtils.js          # localStorage helpers: saveUser, saveToken, validateLogin, logout, getUser
+│   ├── components/
+│   │   ├── FloatingInput.jsx     # Reusable animated floating-label input field
+│   │   ├── ProtectedRoute.jsx    # Redirects unauthenticated users → /login
+│   │   └── PublicRoute.jsx       # Redirects authenticated users → /account
+│   ├── context/
+│   │   └── AuthContext.jsx       # Global auth state: isLoggedIn, currentUser, register, login, logout
+│   ├── pages/
+│   │   ├── Landing.jsx           # Welcome screen (public only)
+│   │   ├── Signup.jsx            # Registration form (public only)
+│   │   ├── Login.jsx             # Login form (public only)
+│   │   └── AccountSettings.jsx   # Profile dashboard (protected)
+│   ├── App.jsx                   # Router setup and mobile viewport wrapper
+│   ├── main.jsx                  # React DOM entry point
+│   └── index.css                 # Global base styles
+├── index.html                    # HTML entry point (loads Rubik font)
+├── render.yaml                   # Render Blueprint — declares this as a Static Site
+├── vite.config.js                # Vite + React + Tailwind plugin config
+├── tailwind.config.js            # Custom PopX color tokens & font family
+├── postcss.config.js             # PostCSS config for Tailwind
+├── eslint.config.js              # ESLint flat config
+└── package.json                  # Dependencies & npm scripts
 ```
 
 ---
@@ -124,8 +115,8 @@ EduCase-Assignment/
 # 1. Clone the repository
 git clone https://github.com/samruddhisr4/EduCase-Assignment.git
 
-# 2. Navigate into the React project
-cd EduCase-Assignment/educase_react
+# 2. Navigate into the project
+cd EduCase-Assignment
 
 # 3. Install dependencies
 npm install
@@ -137,7 +128,8 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser. The app renders in a **375×812px mobile frame** centered on the page.
+Open [http://localhost:5173](http://localhost:5173) in your browser.  
+The app renders in a **375×812px mobile frame** centered on the page.
 
 ---
 
@@ -172,7 +164,7 @@ User logs out          →  Clears localStorage token
                        →  AuthContext resets → Redirect → /
 ```
 
-> **Note:** This app uses `localStorage` for data persistence — no backend or database is required.
+> **Note:** No backend or database required — all data lives in the browser's `localStorage`.
 
 ---
 
@@ -192,12 +184,12 @@ User logs out          →  Clears localStorage token
 
 ### Typography
 
-- **Font Family:** [Rubik](https://fonts.google.com/specimen/Rubik) (loaded from Google Fonts)
+- **Font Family:** [Rubik](https://fonts.google.com/specimen/Rubik) (loaded from Google Fonts via `index.html`)
 - **Weights used:** 400 (regular), 500 (medium)
 
 ### Viewport
 
-The entire app renders within a **375 × 812 px** container (iPhone SE / standard mobile), centered on the viewport with a subtle drop shadow — matching the PopX Figma design spec.
+The app renders inside a **375 × 812 px** container (iPhone SE / standard mobile), centered on the viewport with a subtle drop shadow — matching the PopX Figma design spec.
 
 ---
 
@@ -214,33 +206,14 @@ The entire app renders within a **375 × 812 px** container (iPhone SE / standar
 
 ## ☁️ Deployment
 
-### Option A — Vercel Dashboard *(Recommended)*
+### Option A — Vercel *(Recommended)*
 
-1. Push this repository to GitHub
-2. Go to [vercel.com](https://vercel.com) → **New Project**
-3. Import your GitHub repository
-4. Set the **Root Directory** to `educase_react`
-5. Confirm these build settings (Vercel auto-detects Vite):
-   - **Framework Preset:** Vite
-   - **Build Command:** `npm run build`
-   - **Output Directory:** `dist`
-   - **Install Command:** `npm install`
-6. Click **Deploy** 🎉
+1. Push this repo to GitHub
+2. Go to [vercel.com](https://vercel.com) → **New Project** → Import repo
+3. **No configuration needed** — Vercel auto-detects Vite from the repo root
+4. Click **Deploy** 🎉
 
-> No environment variables are needed — the app uses `localStorage` for all data persistence.
-
-### Option B — Vercel CLI
-
-```bash
-# Install Vercel CLI globally
-npm install -g vercel
-
-# Deploy from inside the project folder
-cd educase_react
-vercel
-```
-
-Follow the interactive prompts. Vercel will auto-detect **Vite** and configure the build output.
+> Every `git push` to `main` triggers an automatic redeploy.
 
 ---
 

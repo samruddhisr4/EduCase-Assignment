@@ -1,6 +1,6 @@
-# PopX — EduCase Assignment
+# EduCase Assignment
 
-> A pixel-perfect, mobile-first authentication portal built with **React 19 + Vite + Tailwind CSS**, faithfully recreating the **PopX** UI design.
+> Mobile-first authentication portal built with **React 19 + Vite + Tailwind CSS**, faithfully recreating the **PopX** UI design.
 
 ---
 
@@ -16,8 +16,7 @@
 - [Authentication Flow](#-authentication-flow)
 - [Design System](#-design-system)
 - [Available Scripts](#-available-scripts)
-- [Deployment](#️-deployment)
-- [License](#-license)
+
 
 ---
 
@@ -35,7 +34,8 @@
 
 ## 🔗 Live Demo
 
-> 🚀 Deployed — *(add your Vercel or Render URL here after deployment)*
+> 🚀 Deployed — edu-case-assignment-swvy.vercel.app
+
 
 ---
 
@@ -204,20 +204,4 @@ The app renders inside a **375 × 812 px** container (iPhone SE / standard mobil
 
 ---
 
-## ☁️ Deployment
 
-### Option A — Vercel *(Recommended)*
-
-1. Push this repo to GitHub
-2. Go to [vercel.com](https://vercel.com) → **New Project** → Import repo
-3. **No configuration needed** — Vercel auto-detects Vite from the repo root
-4. Click **Deploy** 🎉
-
-> Every `git push` to `main` triggers an automatic redeploy.
-
----
-
-## 📄 License
-
-This project was built as part of an **EduCase** front-end assignment.  
-All UI design credit goes to the **PopX** design specification.
